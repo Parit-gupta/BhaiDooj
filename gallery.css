@@ -125,6 +125,8 @@ body {
 }
 
 /* ===== Title ===== */
+/* Add these styles to your gallery.css for the glitch effect */
+
 .title {
   margin: 0 0 40px 0;
   font-size: 2.8rem;
@@ -133,6 +135,41 @@ body {
   opacity: 0;
   transform: translateY(-40px);
   animation: slideFadeIn 1.2s forwards 5s;
+  font-family: monospace;
+  letter-spacing: 2px;
+  transition: all 0.1s;
+}
+
+/* Glitch animation state */
+.title.glitch-animating {
+  animation: glitchShake 0.3s infinite;
+}
+
+/* Final revealed state */
+.title.glitch-revealed {
+  animation: none;
+  text-shadow: 0 0 15px #f78361, 0 0 25px #ffd428;
+}
+
+/* Glitch shake keyframes */
+@keyframes glitchShake {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    text-shadow: 0 0 15px #f78361, 0 0 25px #ffd428;
+  }
+  25% {
+    transform: translate(-3px, 2px);
+    text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff;
+  }
+  50% {
+    transform: translate(3px, -2px);
+    text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff;
+  }
+  75% {
+    transform: translate(-2px, -3px);
+    text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff;
+  }
 }
 
 @keyframes slideFadeIn {
@@ -149,7 +186,6 @@ body {
     transform: translateY(0);
   }
 }
-
 /* ===== Quadrant Grid ===== */
 .quadrant-grid {
   display: grid;

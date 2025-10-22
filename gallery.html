@@ -29,30 +29,52 @@
     <script src="background.js"></script>
 
     <script>
+      // Glitch effect for title
+      const originalText = "📸 Good Pictures I got 📸";
+      const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!?";
+
+      setTimeout(() => {
+        const titleEl = document.querySelector(".title");
+        titleEl.style.fontFamily = "monospace";
+        titleEl.style.letterSpacing = "2px";
+
+        let iterations = 0;
+        const interval = setInterval(() => {
+          titleEl.textContent = originalText
+            .split("")
+            .map((char, index) => {
+              if (char === " " || char === "📸") return char;
+              if (index < iterations) return originalText[index];
+              return characters[Math.floor(Math.random() * characters.length)];
+            })
+            .join("");
+
+          iterations += 1;
+
+          if (iterations > 30) {
+            clearInterval(interval);
+            titleEl.textContent = originalText;
+          }
+        }, 50);
+      }, 5200);
+
+      // Audio code
       let galleryAudio = new Audio("Thunderous Waves.mp3");
       galleryAudio.loop = true;
       galleryAudio.volume = 0.6;
 
-      // Try to play immediately when page loads
       window.addEventListener("load", () => {
         galleryAudio
           .play()
           .then(() => console.log("Gallery audio playing!"))
           .catch((err) => {
-            console.log("Autoplay blocked, waiting for interaction:", err);
-            // If blocked, play on first interaction
-            document.body.addEventListener("click", startGalleryAudio, {
+            console.log("Autoplay blocked:", err);
+            document.body.addEventListener("click", () => galleryAudio.play(), {
               once: true,
             });
           });
       });
-
-      function startGalleryAudio() {
-        galleryAudio
-          .play()
-          .then(() => console.log("Audio started after click"))
-          .catch((err) => console.log("Audio error:", err));
-      }
     </script>
   </body>
 </html>
