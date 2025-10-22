@@ -91,7 +91,7 @@ wordsBox.addEventListener("click", () => {
     } else {
       clearInterval(typing);
     }
-  }, 30);
+  }, 40);
 });
 
 // close when clicking anywhere outside message
