@@ -34,6 +34,10 @@
     <br />
     <br />
 
+    <div id="personalMessageBox" style="display: none">
+      <div class="message-content" id="messageContent"></div>
+    </div>
+
     <!-- Sections -->
     <main class="sections">
       <div class="section-box" id="wordsBox">
@@ -54,38 +58,6 @@
       // Section navigation
       document.getElementById("galleryBox").addEventListener("click", () => {
         window.location.href = "gallery.html";
-      });
-      document.getElementById("wordsBox").addEventListener("click", () => {
-        window.location.href = "words.html";
-      });
-    </script>
-    <script>
-      const bgAudio = document.getElementById("bgAudio");
-      const bgMusic = document.getElementById("bgMusic");
-
-      // Start screen music
-      document.getElementById("startBtn").addEventListener("click", () => {
-        document.getElementById("startScreen").style.display = "none";
-        bgMusic.play();
-      });
-
-      // When Gallery is clicked
-      document.getElementById("galleryBox").addEventListener("click", () => {
-        // Stop other musics
-        bgMusic.pause();
-        bgAudio.pause();
-
-        // Mark in sessionStorage that user interacted
-        sessionStorage.setItem("playGalleryMusic", "true");
-
-        // Go to gallery page
-        window.location.href = "gallery.html";
-      });
-
-      // When Words is clicked
-      document.getElementById("wordsBox").addEventListener("click", () => {
-        bgMusic.pause();
-        window.location.href = "words.html";
       });
     </script>
   </body>

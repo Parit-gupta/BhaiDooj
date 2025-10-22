@@ -29,27 +29,20 @@
     <script src="background.js"></script>
 
     <script>
-      window.addEventListener("DOMContentLoaded", () => {
-        // Check if user came from index with permission
-        const shouldPlay = sessionStorage.getItem("playGalleryMusic");
-        if (shouldPlay === "true") {
-          const galleryAudio = new Audio("Thunderous Waves.mp3");
-          galleryAudio.loop = true;
-          galleryAudio.volume = 0.6;
+      let galleryAudio = new Audio("Thunderous Waves.mp3"); // make sure path is correct
+      galleryAudio.loop = true;
+      galleryAudio.volume = 0.6;
 
-          galleryAudio
-            .play()
-            .then(() => {
-              console.log("Gallery music playing 🎶");
-            })
-            .catch((err) => {
-              console.log("Autoplay blocked:", err);
-            });
+      // Play audio on first user interaction
+      function startGalleryAudio() {
+        galleryAudio.play().catch((err) => {
+          console.log("Audio play blocked, waiting for interaction:", err);
+        });
+        document.body.removeEventListener("click", startGalleryAudio);
+      }
 
-          // Clear the flag
-          sessionStorage.removeItem("playGalleryMusic");
-        }
-      });
+      // Listen for first click anywhere on page
+      document.body.addEventListener("click", startGalleryAudio);
     </script>
   </body>
 </html>
