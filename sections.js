@@ -50,11 +50,16 @@ const messageBox = document.getElementById("personalMessageBox");
 const messageContent = document.getElementById("messageContent");
 
 const messageText = `Hey didi,
+
 I hope you’re doing your best and that life is being kind to you — both physically and mentally. You truly deserve every bit of peace, success, and happiness in this world.
 
 There’s something I’ve wanted to say for a long time… I’m quite an introverted person, and honestly, I overthink a lot. Every time I think of talking to you, my mind starts whispering that maybe my presence would bother you… or that maybe you don’t really want to talk to me. I know that’s not true, but my overthinking always wins.
 
 Still, deep down, I really miss those carefree days — when we were kids, laughing, playing, teasing each other, and sharing those small, unforgettable moments. Those memories might seem ordinary, but to me, they’re precious — tiny pieces of my childhood that always make me smile.
+
+Do you remember when we were at Grandma’s house — me, Pinku bhaiya, and you on the first floor — and how me and Pinku bhaiya used to enjoy irritating you? That was one of the best moments I still remember. And the other one — when we met at Karishma didi’s jagran — that day was special too. After such a long time, seeing you again and having fun like old times meant so much to me. There are so many small moments like these, and I don’t even know if you remember them all, but for me, they’re treasures.
+
+I know I’m not as mature as you and Pinku bhaiya, but in the future I will be. Still, I love this dual identity — being mature in front of others, yet, for myself, still a child holding onto these memories. I think I might forget some of them as I grow, but I will try my best to treasure them forever.
 
 Didi, I’ve always admired you — your confidence, your calmness, and the way you handle everything with so much grace. Papa often tells me about how well you’re doing, and even though I might pretend not to care, the truth is, I feel proud. Deep down, you’ve always been a quiet inspiration to me, even if I never said it out loud.
 
@@ -62,12 +67,17 @@ Today, I just wanted to talk to you — even if just for five minutes — to lau
 
 Also, didi, this thing I made — it’s one of the skills I’ve developed over the past three years. It might look small or even silly to others, but it took me three days and nights to complete. For me, it’s not just a project — it’s a small piece of my heart, something that holds all my effort, emotion, and love for you.
 
-If God gives me another life, I truly wish you’d be my real sister — someone I could hug without hesitation, someone I could tell everything to. Because sometimes, didi, there’s so much I wish I could share, but I can’t — not even with my parents (you know how it is with boys).
+If God gives me another life, I truly wish you’d be my real big sister — someone I could hug without hesitation, someone I could tell everything to as i know being oldest son is not good due to duties and tension on our head and also due to sometimes, didi, there’s so much I wish I could share, but I can’t — not even with my parents (you know how it is with boys).
+
+And didi… I know this letter is emotional,
+but this is the only way I can express myself.
+I can’t really say it in words, because I’m an introvert —
+so I wrote it instead, hoping it reaches your heart the way I mean it to. ❤️
 
 I just want to say one last thing — no matter how far life takes us, you’ll always hold a special place in my heart. I’m genuinely proud of you, and I’ll always keep cheering for you silently from my side.
 
-Happy Bhai Dooj, didi.
-You’ll always be more than just a cousin — you’re my sister, my inspiration, and my silent strength. ❤️`;
+Happy Bhai Dooj, Mishu didi.
+You’ll always be more than just a cousin — you’re my sister, my inspiration, and my silent strength. ❤️ and one last request don't show this letter to any elser as if parents find out I will be done just I need this relief and help from you `;
 
 wordsBox.addEventListener("click", () => {
   messageBox.classList.add("show");
