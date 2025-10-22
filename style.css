@@ -1,0 +1,302 @@
+#startScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+#startBtn {
+  padding: 20px 40px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #ffea00, #ffff66);
+  color: #000;
+  text-shadow: 0 0 5px #fff;
+  transition: transform 0.2s;
+}
+
+#startBtn:hover {
+  transform: scale(1.1);
+}
+
+/* ----------------- Reset & Body ----------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  overflow-x: hidden;
+  background: radial-gradient(circle at 50% 20%, #0a0a1a, #000010 80%);
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+/* ----------------- Night Sky ----------------- */
+.night-sky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 20%, rgba(15, 15, 40, 0.8), #000);
+}
+
+/* ----------------- Blinking Stars ----------------- */
+.night-sky::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  box-shadow: 50px 80px #fff, 120px 150px #fff, 200px 50px #fff,
+    300px 200px #fff, 400px 120px #fff, 500px 220px #fff, 600px 70px #fff,
+    700px 160px #fff, 850px 100px #fff, 900px 200px #fff, 1000px 50px #fff,
+    1100px 180px #fff;
+  animation: twinkle 2s linear infinite alternate;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+/* ----------------- Content ----------------- */
+.content {
+  position: relative;
+  top: 20px;
+  transform: none;
+  z-index: 1;
+  text-align: center;
+  padding: 20px;
+}
+
+.typewriter p {
+  font-size: 1.2rem;
+  color: #ddd;
+  white-space: pre-wrap;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+  position: relative;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.typewriter {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+h1 {
+  font-size: 3rem;
+  letter-spacing: 2px;
+  color: #ffff66;
+  text-shadow: 0 0 3px #ffff66, 0 0 6px #ffff66, 0 0 10px #ffea00,
+    0 0 15px #ffea00, 0 0 20px #ffdd00;
+  animation: glowText 2s infinite alternate;
+}
+
+@keyframes glowText {
+  0%,
+  100% {
+    text-shadow: 0 0 3px #ffff66, 0 0 6px #ffff66, 0 0 10px #ffea00,
+      0 0 15px #ffea00, 0 0 20px #ffdd00;
+  }
+  50% {
+    text-shadow: 0 0 5px #ffff66, 0 0 10px #ffff66, 0 0 12px #ffea00,
+      0 0 18px #ffea00, 0 0 25px #ffdd00;
+  }
+}
+
+/* ----------------- Sections ----------------- */
+.sections {
+  display: flex;
+  justify-content: center;
+  gap: 200px;
+  flex-wrap: wrap;
+  position: relative;
+  top: 50px;
+  z-index: 1;
+}
+
+.section-box {
+  position: relative;
+  width: 250px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+/* Neon strip around border */
+.section-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  pointer-events: none;
+
+  /* Thin moving strip */
+  border: 4px solid transparent;
+  background: linear-gradient(
+    90deg,
+    red,
+    orange,
+    yellow,
+    lime,
+    cyan,
+    blue,
+    magenta,
+    red
+  );
+  background-size: 400% 400%;
+
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  padding: 2px; /* thickness of moving strip */
+
+  animation: moveStrip 3s linear infinite, colorShift 6s linear infinite;
+  transition: all 0.3s ease;
+}
+
+/* Hover: lift and speed up animation */
+.section-box:hover {
+  transform: translateY(-10px) scale(1.05);
+}
+
+.section-box:hover::after {
+  animation: moveStrip 1.5s linear infinite, colorShift 3s linear infinite;
+  filter: brightness(1.5); /* make the strip brighter */
+}
+
+/* Strip animations */
+@keyframes moveStrip {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 400% 0%;
+  }
+}
+
+@keyframes colorShift {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Text inside box */
+.section-box h2 {
+  color: #ffff66;
+  margin-bottom: 10px;
+  text-shadow: 0 0 5px #ffff66;
+  position: relative;
+  z-index: 1;
+}
+
+.section-box p {
+  color: #ddd;
+  font-size: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ----------------- Fireflies ----------------- */
+.firefly {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #ffff66 0%,
+    #ffea00 70%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px 2px #ffea00;
+  opacity: 0.8;
+  animation: flicker 2s infinite alternate;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
+
+.temp-msg {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px 30px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1.2rem;
+  text-shadow: 0 0 5px #ffea00;
+  z-index: 9999;
+  pointer-events: none;
+}

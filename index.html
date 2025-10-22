@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bhai Dooj Night</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Night sky background -->
+    <div class="night-sky"></div>
+
+    <!-- Background audio -->
+    <audio id="bgAudio" src="audio1.mp3"></audio>
+    <audio id="bgMusic" src="Soft Folk Ukulele Background.mp3" loop></audio>
+    <audio id="gallery" src="Thunderous Waves.mp3" loop></audio>
+
+    <!-- Overlay start screen -->
+    <div id="startScreen">
+      <button id="startBtn">✨ Start ✨</button>
+    </div>
+
+    <!-- Main content -->
+    <header class="content">
+      <h1>🌙 Happy Bhai Dooj 🌙</h1>
+      <br />
+      <br />
+      <br />
+      <div class="typewriter">
+        <p id="wishText"></p>
+      </div>
+    </header>
+    <br />
+    <br />
+    <br />
+
+    <!-- Sections -->
+    <main class="sections">
+      <div class="section-box" id="wordsBox">
+        <h2>Words by Me</h2>
+        <p>Click to read my personal message! 💛</p>
+      </div>
+      <div class="section-box" id="galleryBox">
+        <h2>Gallery</h2>
+        <p>Some Good Pics of you! 📸</p>
+      </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="fireflies.js"></script>
+    <script src="typewriter.js"></script>
+    <script src="sections.js"></script>
+    <script>
+      // Section navigation
+      document.getElementById("galleryBox").addEventListener("click", () => {
+        window.location.href = "gallery.html";
+      });
+      document.getElementById("wordsBox").addEventListener("click", () => {
+        window.location.href = "words.html";
+      });
+    </script>
+    <script>
+      const bgAudio = document.getElementById("bgAudio");
+      const bgMusic = document.getElementById("bgMusic");
+
+      // Start screen music
+      document.getElementById("startBtn").addEventListener("click", () => {
+        document.getElementById("startScreen").style.display = "none";
+        bgMusic.play();
+      });
+
+      // When Gallery is clicked
+      document.getElementById("galleryBox").addEventListener("click", () => {
+        // Stop other musics
+        bgMusic.pause();
+        bgAudio.pause();
+
+        // Mark in sessionStorage that user interacted
+        sessionStorage.setItem("playGalleryMusic", "true");
+
+        // Go to gallery page
+        window.location.href = "gallery.html";
+      });
+
+      // When Words is clicked
+      document.getElementById("wordsBox").addEventListener("click", () => {
+        bgMusic.pause();
+        window.location.href = "words.html";
+      });
+    </script>
+  </body>
+</html>

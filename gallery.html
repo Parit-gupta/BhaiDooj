@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animated 4-Quadrant Gallery</title>
+    <link rel="stylesheet" href="gallery.css" />
+  </head>
+  <body>
+    <!-- ✨ Intro logo screen -->
+    <!-- ✨ Particle Glass M Intro -->
+    <div class="intro-logo">
+      <canvas id="particleCanvas"></canvas>
+      <!-- Remove the <h1> M or keep it hidden -->
+      <!-- <h1 class="intro-text glass-m">M</h1> -->
+    </div>
+
+    <h1 class="title">📸 Good Pictures I got 📸</h1>
+    <br /><br />
+    <div class="quadrant-grid" style="display: none">
+      <div class="quadrant" id="quad1"></div>
+      <div class="quadrant" id="quad2"></div>
+      <div class="quadrant" id="quad3"></div>
+      <div class="quadrant" id="quad4"></div>
+    </div>
+
+    <script src="gallery.js"></script>
+    <script src="intro.js"></script>
+    <script src="background.js"></script>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        // Check if user came from index with permission
+        const shouldPlay = sessionStorage.getItem("playGalleryMusic");
+        if (shouldPlay === "true") {
+          const galleryAudio = new Audio("Thunderous Waves.mp3");
+          galleryAudio.loop = true;
+          galleryAudio.volume = 0.6;
+
+          galleryAudio
+            .play()
+            .then(() => {
+              console.log("Gallery music playing 🎶");
+            })
+            .catch((err) => {
+              console.log("Autoplay blocked:", err);
+            });
+
+          // Clear the flag
+          sessionStorage.removeItem("playGalleryMusic");
+        }
+      });
+    </script>
+  </body>
+</html>
