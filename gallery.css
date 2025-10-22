@@ -276,56 +276,238 @@ body {
   }
 }
 
-/* Quadrant Entry Animation */
-@keyframes enterQuad {
+/* ===== STEP 1: Quadrant container styles ===== */
+.quadrant {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #000000, #0a0a0a);
+  border: 2px solid rgba(0, 255, 128, 0.3);
+  box-shadow: 0 0 20px rgba(0, 255, 128, 0.2), 0 0 10px rgba(255, 165, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+  transform-origin: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease,
+    background 0.4s ease;
+}
+
+/* ===== STEP 2: BUTTERFLY ENTRANCE (quadrants themselves) ===== */
+#quad1 {
+  animation: butterflyOpen 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards
+      2.2s,
+    glowPulse 1.2s ease-in-out 5.2s;
+  transform-origin: left center;
+}
+
+#quad2 {
+  animation: butterflyOpen 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards
+      2.4s,
+    glowPulse 1.2s ease-in-out 5.4s;
+  transform-origin: right center;
+}
+
+#quad3 {
+  animation: butterflyOpen 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards
+      2.6s,
+    glowPulse 1.2s ease-in-out 5.6s;
+  transform-origin: left center;
+}
+
+#quad4 {
+  animation: butterflyOpen 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards
+      2.8s,
+    glowPulse 1.2s ease-in-out 5.8s;
+  transform-origin: right center;
+}
+
+@keyframes butterflyOpen {
   0% {
     opacity: 0;
-    transform: translateY(50px) scale(0.9);
+    transform: perspective(1000px) rotateY(90deg) scale(0.3);
+    filter: blur(10px) brightness(2);
+  }
+  50% {
+    opacity: 0.7;
+    transform: perspective(1000px) rotateY(15deg) scale(1.05);
+    filter: blur(3px) brightness(1.5);
+  }
+  80% {
+    opacity: 1;
+    transform: perspective(1000px) rotateY(-5deg) scale(1.02);
+    filter: blur(0) brightness(1.1);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: perspective(1000px) rotateY(0deg) scale(1);
+    filter: blur(0) brightness(1);
   }
 }
 
-/* Apply staggered entry animation */
-#quad1 {
-  animation: enterQuad 1s ease forwards 2s;
-}
-#quad2 {
-  animation: enterQuad 1s ease forwards 2.2s;
-}
-#quad3 {
-  animation: enterQuad 1s ease forwards 2.4s;
-}
-#quad4 {
-  animation: enterQuad 1s ease forwards 2.6s;
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(0, 255, 128, 0.2), 0 0 10px rgba(255, 165, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 255, 128, 0.6), 0 0 30px rgba(255, 165, 0, 0.4);
+  }
 }
 
-/* ===== Image Transitions ===== */
+/* ===== STEP 3: Images base styles ===== */
+.quadrant img {
+  position: relative;
+  z-index: 1;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out, transform 1.2s ease-in-out,
+    filter 0.5s ease;
+}
+
+/* ===== STEP 4: IMAGE TRANSITIONS (after butterfly completes) ===== */
+
+/* QUADRANT 1: Explosive Shatter In */
+#quad1 img {
+  transform: scale(0.3) rotate(45deg);
+  filter: blur(20px);
+}
+
 #quad1 img.fadeShow {
-  opacity: 1;
-  transform: scale(1);
-}
-#quad2 img.slideShow {
-  opacity: 1;
-  transform: translateY(0) scale(1.02);
-}
-#quad3 img.rotateShow {
-  opacity: 1;
-  transform: rotate(0deg) scale(1.02);
-}
-#quad4 img.zoomShow {
-  opacity: 1;
-  transform: scale(1);
+  animation: explosiveEntry 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
+@keyframes explosiveEntry {
+  0% {
+    transform: scale(0.3) rotate(45deg);
+    opacity: 0;
+    filter: blur(20px) brightness(2);
+  }
+  60% {
+    transform: scale(1.15) rotate(-5deg);
+    opacity: 1;
+    filter: blur(0) brightness(1.3);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    filter: blur(0) brightness(1);
+  }
+}
+
+/* QUADRANT 2: 3D Flip Reveal */
 #quad2 img {
-  transform: translateY(30px) scale(1.05);
+  transform: perspective(1000px) rotateY(-180deg) scale(0.8);
 }
+
+#quad2 img.slideShow {
+  animation: flip3D 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+@keyframes flip3D {
+  0% {
+    transform: perspective(1000px) rotateY(-180deg) scale(0.8);
+    opacity: 0;
+    filter: brightness(0.5);
+  }
+  50% {
+    transform: perspective(1000px) rotateY(-90deg) scale(0.9);
+    opacity: 0.5;
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(0deg) scale(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+/* QUADRANT 3: Glitch Materialize */
 #quad3 img {
-  transform: rotate(-8deg) scale(0.95);
+  transform: translate(-50px, -50px) scale(0.5);
+  filter: blur(15px);
 }
+
+#quad3 img.rotateShow {
+  animation: glitchMaterialize 1s steps(4) forwards;
+}
+
+@keyframes glitchMaterialize {
+  0% {
+    transform: translate(-50px, -50px) scale(0.5);
+    opacity: 0;
+    filter: blur(15px) hue-rotate(90deg);
+  }
+  20% {
+    transform: translate(30px, -20px) scale(0.7);
+    opacity: 0.3;
+    filter: blur(10px) hue-rotate(45deg);
+  }
+  40% {
+    transform: translate(-20px, 30px) scale(0.85);
+    opacity: 0.6;
+    filter: blur(5px) hue-rotate(-45deg);
+  }
+  60% {
+    transform: translate(15px, -15px) scale(1.05);
+    opacity: 0.8;
+    filter: blur(2px) hue-rotate(20deg);
+  }
+  80% {
+    transform: translate(-10px, 10px) scale(0.95);
+    opacity: 0.9;
+    filter: blur(1px) hue-rotate(-10deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+    filter: blur(0) hue-rotate(0deg);
+  }
+}
+
+/* QUADRANT 4: Liquid Morph */
 #quad4 img {
-  transform: scale(0.85);
+  transform: scale(0.1);
+  border-radius: 50%;
+  filter: blur(30px) contrast(2);
+}
+
+#quad4 img.zoomShow {
+  animation: liquidMorph 1.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+@keyframes liquidMorph {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+    border-radius: 50%;
+    filter: blur(30px) contrast(2) saturate(3);
+  }
+  30% {
+    transform: scale(0.6);
+    opacity: 0.4;
+    border-radius: 40%;
+    filter: blur(15px) contrast(1.5) saturate(2);
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 0.8;
+    border-radius: 20%;
+    filter: blur(5px) contrast(1.2) saturate(1.5);
+  }
+  85% {
+    transform: scale(0.95);
+    opacity: 1;
+    border-radius: 5%;
+    filter: blur(1px) contrast(1.1) saturate(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    border-radius: 0%;
+    filter: blur(0) contrast(1) saturate(1);
+  }
 }
