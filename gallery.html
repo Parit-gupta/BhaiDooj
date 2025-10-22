@@ -29,20 +29,30 @@
     <script src="background.js"></script>
 
     <script>
-      let galleryAudio = new Audio("Thunderous Waves.mp3"); // make sure path is correct
+      let galleryAudio = new Audio("Thunderous Waves.mp3");
       galleryAudio.loop = true;
       galleryAudio.volume = 0.6;
 
-      // Play audio on first user interaction
-      function startGalleryAudio() {
-        galleryAudio.play().catch((err) => {
-          console.log("Audio play blocked, waiting for interaction:", err);
-        });
-        document.body.removeEventListener("click", startGalleryAudio);
-      }
+      // Try to play immediately when page loads
+      window.addEventListener("load", () => {
+        galleryAudio
+          .play()
+          .then(() => console.log("Gallery audio playing!"))
+          .catch((err) => {
+            console.log("Autoplay blocked, waiting for interaction:", err);
+            // If blocked, play on first interaction
+            document.body.addEventListener("click", startGalleryAudio, {
+              once: true,
+            });
+          });
+      });
 
-      // Listen for first click anywhere on page
-      document.body.addEventListener("click", startGalleryAudio);
+      function startGalleryAudio() {
+        galleryAudio
+          .play()
+          .then(() => console.log("Audio started after click"))
+          .catch((err) => console.log("Audio error:", err));
+      }
     </script>
   </body>
 </html>

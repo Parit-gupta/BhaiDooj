@@ -36,7 +36,13 @@ document.getElementById('wordsBox').addEventListener('click', e => {
 
 document.getElementById('galleryBox').addEventListener('click', e => {
   createConfetti(e.clientX, e.clientY);
-  window.open("gallery.html", "_blank"); // open gallery in new tab
+  
+  // Stop all audio in current tab
+  document.getElementById('bgAudio').pause();
+  document.getElementById('bgMusic').pause();
+  
+  // Open gallery in new tab
+  window.open("gallery.html", "_blank");
 });
 
 const wordsBox = document.getElementById("wordsBox");
